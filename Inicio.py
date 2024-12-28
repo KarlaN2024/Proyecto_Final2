@@ -1,18 +1,8 @@
 import streamlit as st
-from PIL import Image
+import importlib
 
 # Configuración de la página
 st.set_page_config(page_title="Proyecto Final", layout="wide")
-
-# Cargar imágenes
-@st.cache_resource
-def load_images():
-    eda_image = Image.open("utils/EDA.png")
-    hipotesis_image = Image.open("utils/hipotesis.png")
-    modelo_image = Image.open("utils/ML.png")
-    return eda_image, hipotesis_image, modelo_image
-
-eda_image, hipotesis_image, modelo_image = load_images()
 
 # Título de la página
 st.title("Proyecto Final")
@@ -27,18 +17,28 @@ page = st.sidebar.radio(
 
 # Condiciones para cargar el contenido según la página seleccionada
 if page == "Análisis Exploratorio de Datos (EDA)":
-    # Aquí importas y ejecutas tu código de EDA
-    import pages.1_💡_EDA  # Asegúrate de que la página EDA esté correctamente configurada
+    # Importar el módulo EDA dinámicamente
+    eda_module = importlib.import_module("pages.1_💡_EDA")  # Mantener el nombre original del archivo
 
 elif page == "Pruebas de Hipótesis":
     # Aquí importas y ejecutas tu código de Hipótesis
-    import pages.2_💡_Hipotesis
+    hipotesis_module = importlib.import_module("pages.2_💡_Hipotesis")
 
 elif page == "Modelo Predictivo":
     # Aquí importas y ejecutas tu código de Modelo
-    import pages.3_💡_Modelo
+    modelo_module = importlib.import_module("pages.3_💡_Modelo")
 
-# Mostrar imágenes y descripciones en la página de inicio
+# Agregar las imágenes como lo hacías antes si es necesario
+from PIL import Image
+
+@st.cache_resource
+def load_images():
+    eda_image = Image.open("utils/EDA.png")
+    hipotesis_image = Image.open("utils/hipotesis.png")
+    modelo_image = Image.open("utils/ML.png")
+    return eda_image, hipotesis_image, modelo_image
+
+eda_image, hipotesis_image, modelo_image = load_images()
 
 # Sección: EDA
 st.header("Análisis Exploratorio de Datos (EDA)")
@@ -61,4 +61,3 @@ with st.container():
 # Mensaje final
 st.markdown("---")
 st.write("Explora cada sección a través de las opciones del menú para obtener una experiencia completa.")
-
