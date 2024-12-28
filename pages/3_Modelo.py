@@ -80,7 +80,6 @@ elif model_choice == "Random Forest":
 
     # Mostrar el porcentaje de probabilidad
     st.write(f"Probabilidad de estar por debajo del precio medio: {probabilidad_abajo:.2f}%")
-    st.write(f"Probabilidad de estar por encima del precio medio: {probabilidad_arriba:.2f}%")
 
 # Botón para realizar la predicción
 if st.sidebar.button("Realizar Predicción"):
