@@ -137,4 +137,4 @@ def hipotesis5(df):
     plt.title("Disponibilidad por Categoría de Precio")
     plt.xlabel("Categoría de Precio")
     plt.ylabel("Días Disponibles")
-    plt.show()    
+    st.pyplot(plt)
