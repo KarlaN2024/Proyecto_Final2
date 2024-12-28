@@ -3,8 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Usar st.experimental_memo si prefieres manejar la memoria de manera más explícita
-@st.experimental_memo
+# Usar st.cache_data para manejar la memoria de manera más eficiente
+@st.cache_data
 def load_data():
     try:
         # Intenta cargar el archivo
