@@ -3,7 +3,6 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.stats import f_oneway, ttest_ind
-from statsmodels.stats.multitest import multipletests  # Este sigue siendo útil para Bonferroni
 from itertools import combinations
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
