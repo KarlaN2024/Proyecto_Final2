@@ -1,5 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import pandas as pd
 import joblib
 
@@ -24,5 +25,18 @@ model_rf.fit(X_train, y_train)
 
 # Guardar el modelo
 joblib.dump(model_rf, 'models/random_forest.pkl')
+
+# Realizar predicciones
+y_pred = model_rf.predict(X_test)
+
+# Evaluación del modelo
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Mostrar las métricas de evaluación
+print(f"Error Absoluto Medio (MAE): {mae:.2f}")
+print(f"Error Cuadrático Medio (MSE): {mse:.2f}")
+print(f"R² Score: {r2:.4f}")
 
 
