@@ -18,15 +18,15 @@ page = st.sidebar.radio(
 # Condiciones para cargar el contenido según la página seleccionada
 if page == "Análisis Exploratorio de Datos (EDA)":
     # Importar el módulo EDA dinámicamente
-    eda_module = importlib.import_module("pages.1_💡_EDA.py")  # Mantener el nombre original del archivo
+    eda_module = importlib.import_module("pages.1_EDA.py")  # Mantener el nombre original del archivo
 
 elif page == "Pruebas de Hipótesis":
     # Aquí importas y ejecutas tu código de Hipótesis
-    hipotesis_module = importlib.import_module("pages.2_💡_Hipotesis.py")
+    hipotesis_module = importlib.import_module("pages.2_Hipotesis.py")
 
 elif page == "Modelo Predictivo":
     # Aquí importas y ejecutas tu código de Modelo
-    modelo_module = importlib.import_module("pages.3_💡_Modelo.py")
+    modelo_module = importlib.import_module("pages.3_Modelo.py")
 
 # Agregar las imágenes como lo hacías antes si es necesario
 from PIL import Image
