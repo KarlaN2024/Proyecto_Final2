@@ -1,5 +1,6 @@
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import pandas as pd
 import joblib
 
@@ -24,4 +25,20 @@ model_lr.fit(X_train, y_train)
 
 # Guardar el modelo
 joblib.dump(model_lr, 'models/linear_regression.pkl')
+
+# Evaluación del modelo en el conjunto de prueba
+y_pred = model_lr.predict(X_test)
+
+# Calcular las métricas de evaluación
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Mostrar las métricas de evaluación
+print(f"Evaluación del modelo de Regresión Lineal:")
+print(f"Error Absoluto Medio (MAE): {mae:.2f}")
+print(f"Error Cuadrático Medio (MSE): {mse:.2f}")
+print(f"R² Score: {r2:.4f}")
+
+
 
