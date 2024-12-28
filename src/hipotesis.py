@@ -132,9 +132,10 @@ def hipotesis5(df):
     st.write("**Coeficientes del Modelo:**")
     st.dataframe(coeficients)
 
+# Boxplot de disponibilidad vs. precio
     plt.figure(figsize=(8, 5))
-    sns.scatterplot(x=y_test, y=y_pred, alpha=0.7)
-    plt.title("Valores Reales vs. Predicciones")
-    plt.xlabel("Valores reales de Disponibilidad")
-    plt.ylabel("Predicciones de Disponibilidad")
-    st.pyplot(plt)
+    sns.boxplot(x=pd.qcut(data['price'], q=3, labels=['low', 'medium', 'high']), y=data['availability_365'])
+    plt.title("Disponibilidad por Categoría de Precio")
+    plt.xlabel("Categoría de Precio")
+    plt.ylabel("Días Disponibles")
+    plt.show()    
