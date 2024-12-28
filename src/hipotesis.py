@@ -131,8 +131,7 @@ def hipotesis5(df):
     coeficients = pd.DataFrame({'Feature': X.columns, 'Coefficient': model.coef_})
     st.write("**Coeficientes del Modelo:**")
     st.dataframe(coeficients)
-
-# Boxplot de disponibilidad vs. precio
+    
     plt.figure(figsize=(8, 5))
     sns.boxplot(x=pd.qcut(data['price'], q=3, labels=['low', 'medium', 'high']), y=data['availability_365'])
     plt.title("Disponibilidad por Categoría de Precio")
