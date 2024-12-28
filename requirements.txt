@@ -3,8 +3,7 @@ numpy
 seaborn
 matplotlib
 scipy
-statsmodels
-itertools
+statsmodels==0.13.2
 folium
 scikit-learn
 sklearn.linear_model
@@ -12,3 +11,4 @@ sklearn.model_selection
 sklearn.metrics 
 sklearn.ensemble
 streamlit
+Cythion
