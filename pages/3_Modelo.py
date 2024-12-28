@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
 import joblib
 
 # Cargar los modelos entrenados
@@ -84,23 +85,26 @@ elif model_choice == "Random Forest":
     st.write(f"Probabilidad de estar por encima del precio medio: {probabilidad_arriba:.2f}%")
 
 # Evaluar el modelo
-def evaluar_modelo(model, X, y):
-    # Realizar predicciones
-    y_pred = model.predict(X)
+def evaluar_modelo(model, X_train, X_test, y_train, y_test):
+    # Realizar predicciones sobre el conjunto de prueba
+    y_pred = model.predict(X_test)
     
     # Calcular métricas
-    mae = mean_absolute_error(y, y_pred)
-    mse = mean_squared_error(y, y_pred)
-    r2 = r2_score(y, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
     
     return mae, mse, r2
 
-# Preparar los datos para la evaluación (usamos los datos de prueba)
+# Preparar los datos para la evaluación (usamos los datos de entrenamiento y prueba)
 X = preparar_datos(df)
 y = df['availability_365']  # Variable dependiente (en este caso, disponibilidad de los apartamentos)
 
+# Dividir los datos en conjunto de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
 # Mostrar las métricas de evaluación del modelo
-mae, mse, r2 = evaluar_modelo(model, X, y)
+mae, mse, r2 = evaluar_modelo(model, X_train, X_test, y_train, y_test)
 
 st.write(f"**Evaluación del Modelo {model_choice}:**")
 st.write(f"**Mean Absolute Error (MAE):** {mae:.2f}")
