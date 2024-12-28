@@ -14,7 +14,7 @@ from .hipotesis import (
     hipotesis5
 )
 
-# Importar funciones de análisis exploratorio de datos
+# Importar funciones de análisis exploratorio de datos (EDA)
 from .eda import (
     panoramaGeneral,
     resumenEstadistico,
