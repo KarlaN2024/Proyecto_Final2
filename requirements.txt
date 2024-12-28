@@ -5,9 +5,5 @@ matplotlib
 scipy
 folium
 scikit-learn
-sklearn.linear_model
-sklearn.model_selection
-sklearn.metrics 
-sklearn.ensemble
 streamlit
 Cythion
