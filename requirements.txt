@@ -3,7 +3,6 @@ numpy
 seaborn
 matplotlib
 scipy
-statsmodels==0.13.2
 folium
 scikit-learn
 sklearn.linear_model
