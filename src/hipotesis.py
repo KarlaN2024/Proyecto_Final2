@@ -3,7 +3,6 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.stats import f_oneway, ttest_ind
-from itertools import combinations
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
@@ -49,7 +48,7 @@ def hipotesis1(df):
 ### HIPÓTESIS 2 ###
 def hipotesis2(df):
     """
-    Realiza un análisis ANOVA y pruebas T pareadas con corrección de Bonferroni.
+    Realiza un análisis ANOVA sin corrección de Bonferroni.
     Genera un gráfico de caja para la distribución de precios por vecindario.
     """
     # ANOVA
@@ -57,21 +56,6 @@ def hipotesis2(df):
     groups = [df_anova[df_anova['neighbourhood_group'] == group]['price'] for group in df_anova['neighbourhood_group'].unique()]
     anova_result = f_oneway(*groups)
     st.write(f"**Resultado ANOVA:**\nValor p: {anova_result.pvalue:.4e}")
-
-    # Comparaciones pareadas con Bonferroni
-    results = []
-    for group1, group2 in combinations(df_anova['neighbourhood_group'].unique(), 2):
-        t_stat, p_value = ttest_ind(
-            df_anova[df_anova['neighbourhood_group'] == group1]['price'],
-            df_anova[df_anova['neighbourhood_group'] == group2]['price'],
-            equal_var=False
-        )
-        results.append({'Grupo 1': group1, 'Grupo 2': group2, 'p-valor': p_value})
-
-    bonferroni_results = pd.DataFrame(results)
-    bonferroni_results['p-valor Ajustado'] = multipletests(bonferroni_results['p-valor'], method='bonferroni')[1]
-    st.write("**Resultados Bonferroni:**")
-    st.dataframe(bonferroni_results)
 
     # Gráfico
     plt.figure(figsize=(12, 6))
