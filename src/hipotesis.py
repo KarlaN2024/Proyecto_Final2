@@ -132,9 +132,10 @@ def hipotesis5(df):
     st.write("**Coeficientes del Modelo:**")
     st.dataframe(coeficients)
     
+    # Gráfico de dispersión para visualizar la relación entre disponibilidad y precio
     plt.figure(figsize=(8, 5))
-    sns.boxplot(x=pd.qcut(data['price'], q=3, labels=['low', 'medium', 'high']), y=data['availability_365'])
-    plt.title("Disponibilidad por Categoría de Precio")
-    plt.xlabel("Categoría de Precio")
-    plt.ylabel("Días Disponibles")
+    sns.scatterplot(x=data['price'], y=data['availability_365'], alpha=0.6)
+    plt.title("Relación entre Disponibilidad y Precio")
+    plt.xlabel("Precio")
+    plt.ylabel("Disponibilidad (Días)")
     st.pyplot(plt)
