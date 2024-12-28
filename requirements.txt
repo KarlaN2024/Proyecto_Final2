@@ -6,4 +6,3 @@ scipy
 folium
 scikit-learn
 streamlit
-Cythion
