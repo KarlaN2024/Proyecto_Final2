@@ -5,9 +5,6 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import src
 
-#!pip install ydata-profiling
-from ydata_profiling import ProfileReport
-
 df = src.tratarNulos
 
 def reporte ():
