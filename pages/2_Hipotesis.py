@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st 
 import pandas as pd
 from src.hipotesis import (
     hipotesis1,
@@ -86,4 +86,3 @@ elif hypothesis_options == "Hipótesis 5":
             hipotesis5(df)
         except Exception as e:
             output_container.error(f"Error en Hipótesis 5: {e}")
-
