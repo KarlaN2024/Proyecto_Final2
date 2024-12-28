@@ -3,6 +3,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import pandas as pd
 import joblib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import streamlit as st
 
 # Cargar los datos
 df = pd.read_csv("data/AB_NYC_2019.csv")
@@ -35,8 +38,26 @@ mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 
 # Mostrar las métricas de evaluación
-print(f"Error Absoluto Medio (MAE): {mae:.2f}")
-print(f"Error Cuadrático Medio (MSE): {mse:.2f}")
-print(f"R² Score: {r2:.4f}")
+st.write(f"**Error Absoluto Medio (MAE):** {mae:.2f}")
+st.write(f"**Error Cuadrático Medio (MSE):** {mse:.2f}")
+st.write(f"**R² Score:** {r2:.4f}")
 
+# Gráfico: Valores Reales vs. Predicciones
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x=y_test, y=y_pred, alpha=0.7)
+plt.title("Valores Reales vs. Predicciones")
+plt.xlabel("Valores Reales de Precio")
+plt.ylabel("Valores Predichos de Precio")
+plt.grid(True)
+st.pyplot(plt)
 
+# Filtrar los valores por debajo de la media
+mean_price = y_test.mean()
+y_pred_below_mean = y_pred[y_pred < mean_price]
+y_test_below_mean = y_test.loc[y_pred < mean_price]
+
+# Calcular porcentaje de valores por debajo de la media
+percentage_below_mean = len(y_pred_below_mean) / len(y_test) * 100
+
+# Mostrar porcentaje de valores por debajo de la media
+st.write(f"**Porcentaje de predicciones por debajo de la media del precio:** {percentage_below_mean:.2f}%")
