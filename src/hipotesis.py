@@ -3,13 +3,12 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from scipy.stats import f_oneway, ttest_ind
-from statsmodels.stats.multitest import multipletests
+from statsmodels.stats.multitest import multipletests  # Este sigue siendo útil para Bonferroni
 from itertools import combinations
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
 import streamlit as st
-
 
 # Tratamiento de valores nulos y outliers
 def tratar_nulos_y_outliers(df):
@@ -56,9 +55,8 @@ def hipotesis2(df):
     """
     # ANOVA
     df_anova = df[['neighbourhood_group', 'price']].dropna()
-    anova_result = f_oneway(
-        *[df_anova[df_anova['neighbourhood_group'] == group]['price'] for group in df_anova['neighbourhood_group'].unique()]
-    )
+    groups = [df_anova[df_anova['neighbourhood_group'] == group]['price'] for group in df_anova['neighbourhood_group'].unique()]
+    anova_result = f_oneway(*groups)
     st.write(f"**Resultado ANOVA:**\nValor p: {anova_result.pvalue:.4e}")
 
     # Comparaciones pareadas con Bonferroni
