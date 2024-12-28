@@ -3,9 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Configuración inicial
-st.set_page_config(page_title="Análisis Exploratorio de Datos", layout="wide")
-
 # Usar st.experimental_memo si prefieres manejar la memoria de manera más explícita
 @st.experimental_memo
 def load_data():
