@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
 # Cargar los modelos entrenados
@@ -82,9 +83,26 @@ elif model_choice == "Random Forest":
     st.write(f"Probabilidad de estar por debajo del precio medio: {probabilidad_abajo:.2f}%")
     st.write(f"Probabilidad de estar por encima del precio medio: {probabilidad_arriba:.2f}%")
 
+# Evaluar el modelo
+def evaluar_modelo(model, X, y):
+    # Realizar predicciones
+    y_pred = model.predict(X)
+    
+    # Calcular métricas
+    mae = mean_absolute_error(y, y_pred)
+    mse = mean_squared_error(y, y_pred)
+    r2 = r2_score(y, y_pred)
+    
+    return mae, mse, r2
 
-# Botón para realizar la predicción
-if st.sidebar.button("Realizar Predicción"):
-    st.write("Predicción realizada.")
+# Preparar los datos para la evaluación (usamos los datos de prueba)
+X = preparar_datos(df)
+y = df['availability_365']  # Variable dependiente (en este caso, disponibilidad de los apartamentos)
 
+# Mostrar las métricas de evaluación del modelo
+mae, mse, r2 = evaluar_modelo(model, X, y)
 
+st.write(f"**Evaluación del Modelo {model_choice}:**")
+st.write(f"**Mean Absolute Error (MAE):** {mae:.2f}")
+st.write(f"**Mean Squared Error (MSE):** {mse:.2f}")
+st.write(f"**R² Score:** {r2:.2f}")
