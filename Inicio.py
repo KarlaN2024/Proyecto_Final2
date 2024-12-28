@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-# Configuración inicial de la página
+# Configuración de la página
 st.set_page_config(page_title="Proyecto Final", layout="wide")
 
 # Cargar imágenes
@@ -17,6 +17,28 @@ eda_image, hipotesis_image, modelo_image = load_images()
 # Título de la página
 st.title("Proyecto Final")
 st.write("Bienvenido a la aplicación del proyecto final. Aquí exploraremos un dataset de Airbnb de Nueva York a través de diferentes módulos: Análisis Exploratorio, Pruebas de Hipótesis y Modelos de Predicción.")
+
+# Menú de selección de páginas
+st.sidebar.title("Menú")
+page = st.sidebar.radio(
+    "Selecciona una sección:",
+    ["Análisis Exploratorio de Datos (EDA)", "Pruebas de Hipótesis", "Modelo Predictivo"]
+)
+
+# Condiciones para cargar el contenido según la página seleccionada
+if page == "Análisis Exploratorio de Datos (EDA)":
+    # Aquí importas y ejecutas tu código de EDA
+    import pages.1_💡_EDA  # Asegúrate de que la página EDA esté correctamente configurada
+
+elif page == "Pruebas de Hipótesis":
+    # Aquí importas y ejecutas tu código de Hipótesis
+    import pages.2_💡_Hipotesis
+
+elif page == "Modelo Predictivo":
+    # Aquí importas y ejecutas tu código de Modelo
+    import pages.3_💡_Modelo
+
+# Mostrar imágenes y descripciones en la página de inicio
 
 # Sección: EDA
 st.header("Análisis Exploratorio de Datos (EDA)")
@@ -39,3 +61,4 @@ with st.container():
 # Mensaje final
 st.markdown("---")
 st.write("Explora cada sección a través de las opciones del menú para obtener una experiencia completa.")
+
